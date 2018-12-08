@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule, MatNativeDateModule, MatFormFieldModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { ArtistSearchComponent } from './artist-search/artist-search.component';
     ArtistSearchComponent
   ],
   imports: [
+    Ng4LoadingSpinnerModule.forRoot(),
     NgbModule.forRoot(),
     FormsModule,
     BrowserModule,

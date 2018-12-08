@@ -1,9 +1,9 @@
 <form>
-  <div class="form-group">
+  <div class="form-group wrapper margin">
     <label for="txtArtistName">Artist</label>
     <input [(ngModel)]="artist" type="email" class="form-control" id="exampleInputEmail1"
            aria-describedby="emailHelp" placeholder="Enter artist name" name="txtArtistName">
     <small id="emailHelp" class="form-text text-muted" name="txtArtistMsg">Enter the name of the artist above.</small>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="getArtistData()" name="btnArtistName">Submit</button>
+  <button type="submit" class="btn btn-primary margin" (click)="getArtistData()" name="btnArtistName">Submit</button>
 </form>

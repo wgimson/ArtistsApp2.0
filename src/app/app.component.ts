@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as d3 from 'd3';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 import { ApiService } from './api.service';
 
@@ -20,9 +21,14 @@ export class AppComponent implements OnInit {
   kanyeMentions = [];
   artistMentions = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private spinnerService: Ng4LoadingSpinnerService
+    ) {}
 
   ngOnInit() {
+    this.artistName = 'Kanye West';
+    //this.getArtistMentions(356, this.createChartForArtist, this);
     this.getKanyeMentions(this.createKanyeChart, this);
   }
 
@@ -192,6 +198,14 @@ export class AppComponent implements OnInit {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
+
+        svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text('Kanye West');
     // TEST
     // d3.select('p')
     // .style('background-color', 'red')
@@ -276,11 +290,18 @@ export class AppComponent implements OnInit {
         err => console.log(err),
         () => {
           callback(context);
+          this.spinnerService.hide();
         }
       );
   }
 
   onArtistInfo(artistInfo: any) {
+    // this.spinnerService.show();
+    if (artistInfo === undefined) {
+      alert('sorry could not find artist');
+      return;
+    }
+
     this.artistName = artistInfo.name;
     this.getArtistMentions(artistInfo.id, this.createChartForArtist, this);
   }

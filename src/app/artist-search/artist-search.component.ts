@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 import { ApiService } from '../api.service';
 
 @Component({
@@ -13,13 +15,15 @@ export class ArtistSearchComponent implements OnInit {
   @Output() artistInfo: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private spinnerService: Ng4LoadingSpinnerService
   ) { }
 
   ngOnInit() {
   }
 
   getArtistData() {
+    this.spinnerService.show();
     this.apiService.getArtists(this.artist, 10)
       .subscribe((d) => {
         const payload = d['artists'][0];
