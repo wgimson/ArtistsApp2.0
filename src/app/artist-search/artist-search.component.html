@@ -1,9 +1,27 @@
 <form>
-  <div class="form-group wrapper margin">
-    <label for="txtArtistName">Artist</label>
-    <input [(ngModel)]="artist" type="email" class="form-control" id="exampleInputEmail1"
-           aria-describedby="emailHelp" placeholder="Enter artist name" name="txtArtistName">
-    <small id="emailHelp" class="form-text text-muted" name="txtArtistMsg">Enter the name of the artist above.</small>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <label for="txtArtistName">Artist</label>
+        <input [(ngModel)]="artist" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter artist name" name="txtArtistName">
+        <small id="emailHelp" class="form-text text-muted" name="txtArtistMsg">Enter the name of the artist above.</small>
+      </div>
+      <div class="col-sm-9">
+        <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+        </ngb-datepicker>
+        <ng-template #t let-date let-focused="focused">
+          <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+            (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+            {{ date.day }}
+          </span>
+        </ng-template>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+    <button style="float: right;margin-right: 31%;" type="submit" class="btn btn-primary margin" (click)="getArtistData()" name="btnArtistName">Submit</button>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary margin" (click)="getArtistData()" name="btnArtistName">Submit</button>
 </form>
